@@ -1,11 +1,9 @@
 
-H2
-==============
+# H2
 
 `version: af6a5662c5d4e772f2c1db6469b8a5f112857dd2`
 
-Build In
-==============
+# Build In
 
 ```
 mem:management_db_9092
@@ -38,8 +36,7 @@ mem:management_db_9092
         VIEWS
 ```
 
-URL
-===============
+# URL
 
 ```
 jdbc:h2:{
@@ -49,8 +46,7 @@ jdbc:h2:{
 }[;key=value;...]
 ```
 
-Properties
-===============
+# Properties
 
 * data suffix: .data.db
 * trace suffix: .trace.db
@@ -104,28 +100,35 @@ Properties
 * THROTTLE
 * WRITE_DELAY
 
-Constants
-=================
+# Constants
 
 magic: -- H2 0.5/[B|T] -- 
 
-Data Structure
-=================
+# Buildin Table
 
-structure
------------------
+## SYS
+
+* **User**: DBA
+* **Schema**: PUBLIC
+
+| ID | HEAD | TYPE | SQL | 
+|----|------|------|-----|
+
+# Data Structure
+
+## data structure
 
 |     0-7     |  8-15  | 16-23 | 24 | ... | ... | ... | ... | pos - 2  | pos - 1 |
 |-------------|--------|-------|----|-----|-----|-----|-----|----------|---------|
 | block count |   id   |  len  |type|data |type |data | ... | Checksum |   LF    |
 
-e.g.
------------------
+## e.g.
 
-00000001 00000000 00000004 e 00000001 e 00000000 e 00000006 n
+00000001 00000000 00000004 e 00000001 e 00000000 e 00000006 n "string" ...
 
-type
------------------
+## type
+
+### data
 
 |   b   | c  |  d  | e | f  |   g   |
 |-------|----|-----|---|----|-------|
@@ -143,8 +146,13 @@ type
 |-----|----------|-----------|----|----|
 |ARRAY|RESULT_SET|JAVA_OBJECT|UUID|NULL|
 
-Misc
-=================
+### log
+
+|       P      |   C  |    R   |   S   |    T   |    I    |   D    |
+|--------------|------|--------|-------|--------|---------|--------|
+|prepare commit|commit|rollback|summary|truncate|!diskFile|diskFile|   
+
+# Misc
 
 userPasswordHash: sha([username]@[password])
 
